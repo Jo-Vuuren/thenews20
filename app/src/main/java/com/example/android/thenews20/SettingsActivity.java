@@ -14,7 +14,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+        setContentView(R.layout.activity_settings);
     }
 
     public static class NewsPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
@@ -24,19 +24,21 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
 
-            Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
+            Preference orderBy = findPreference(getString(R.string.settings_order_by_label));
             bindPreferenceSummaryToValue(orderBy);
 
-            Preference section = findPreference(getString(R.string.settings_section_key));
+            Preference section = findPreference(getString(R.string.settings_category_label));
             bindPreferenceSummaryToValue(section);
 
-            Preference keyword = findPreference(getString(R.string.settings_keyword_key));
+            Preference keyword = findPreference(getString(R.string.settings_keyword_label));
             bindPreferenceSummaryToValue(keyword);
+
         }
+
 
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
-            String stringValue = "";
+            String stringValue = newValue.toString();
             if (preference instanceof ListPreference) {
                 ListPreference listPreference = (ListPreference) preference;
                 int prefIndex = listPreference.findIndexOfValue(stringValue);

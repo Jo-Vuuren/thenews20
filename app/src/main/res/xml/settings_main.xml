@@ -2,12 +2,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
 
+
     <EditTextPreference
+        android:defaultValue="@string/setting_keyword_default"
         android:inputType="textAutoComplete"
+        android:key="@string/settings_keyword_label"
         android:selectAllOnFocus="true"
         android:title="@string/settings_keyword_label" />
 
     <ListPreference
+        android:defaultValue="@string/settings_order_by_default"
         android:entries="@array/settings_section_labels"
         android:entryValues="@array/settings_section_values"
         android:title="@string/settings_category_label" />

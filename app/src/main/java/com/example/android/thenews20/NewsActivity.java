@@ -1,10 +1,12 @@
 package com.example.android.thenews20;
 
-import android.app.LoaderManager;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -24,12 +26,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Result>> {
+public class NewsActivity extends AppCompatActivity implements androidx.loader.app.LoaderManager.LoaderCallbacks<List<Result>> {
 
     /**
      * Tag for log messages
      */
-    private static final String LOG_TAG = NewsLoader.class.getName();
+    private static final String LOG_TAG = NewsActivity.class.getName();
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
@@ -39,7 +41,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
      * URL for google books data from the Google API
      */
     private static final String GUARDIAN_REQUEST_URL =
-            "https://content.guardianapis.com/search?api-key=9ff797aa-915a-4c8c-8077-af0831891a80";
+            "http://content.guardianapis.com/search?api-key=test&show-tags=contributor&from-date=2017-01-01";
 
     ProgressDialog progressDialog;
 
@@ -82,7 +84,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         if (isNetworkAvailable(context)) {
 
             // Get a reference to the LoaderManager, in order to interact with loaders.
-            LoaderManager loaderManager = getLoaderManager();
+            LoaderManager loaderManager = getSupportLoaderManager();
 
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
@@ -91,7 +93,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
         } else {
             //Provide feedback about no internet connection
-            Toast.makeText(NewsActivity.this, "Please check your internet connection - No internet!", Toast.LENGTH_LONG).show();
+            Toast.makeText(NewsActivity.this, "Please check your internet connection.", Toast.LENGTH_LONG).show();
         }
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
@@ -115,7 +117,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public android.content.Loader<List<Result>> onCreateLoader(int i, Bundle bundle) {
+    public Loader<List<Result>> onCreateLoader(int i, Bundle bundle) {
         progressDialog = new ProgressDialog(NewsActivity.this);
         progressDialog.setMessage("Loading...");
         progressDialog.setIndeterminate(false);
@@ -140,10 +142,12 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("q", keyword);
         uriBuilder.appendQueryParameter("section", section);
         uriBuilder.appendQueryParameter("order-by", order_by);
+        String url = uriBuilder.toString();
 
         Log.v(LOG_TAG, uriBuilder.toString());
         // Create a new loader for the given URL
-        return new Loader<List<Result>>(this, uriBuilder.toString());
+        return new NewsLoader(this, GUARDIAN_REQUEST_URL);
+
     }
 
     @Override

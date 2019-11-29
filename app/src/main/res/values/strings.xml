@@ -2,7 +2,7 @@
     <string name="app_name">The News 2.0</string>
 
     <!-- Title text for the empty view -->
-    <string name="empty_view_title_text">There are no new article for these terms.</string>
+    <string name="empty_view_title_text">There are no new articles.</string>
 
     <!-- The Menu Item [CHAR LIMIT=NONE] -->
     <string name="settings_menu_item">Settings</string>

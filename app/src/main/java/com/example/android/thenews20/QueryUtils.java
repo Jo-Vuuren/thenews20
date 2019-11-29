@@ -18,6 +18,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Helper methods related to requesting and receiving news data from Guardian API.
  */

@@ -34,45 +34,50 @@ public class NewsAdapter extends ArrayAdapter<Result> {
         // Check if the existing view is being reused, otherwise inflate the view
         View listItemView = convertView;
 
-        if (listItemView == null) {
+        if (listItemView != null) {
+
+            listItemView.getTag();
+        } else {
+
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.article_list_item, parent, false);
         }
 
+
         // Get the {@link Result} object located at this position in the list
-        Result currentResult = getItem(position);
+        Result currentArticle = getItem(position);
 
         // Find the TextView with view ID publication_date
         // Format the date string (i.e. "Mar 3, 1984")
         TextView publicationDateTextView = listItemView.findViewById(R.id.publication_date);
-        String formattedDate = formatDate(currentResult.getPublicationDate());
+        String formattedDate = formatDate(currentArticle.getPublicationDate());
         // Display the date of the current result in the TextView
         publicationDateTextView.setText(formattedDate);
         publicationDateTextView.setVisibility(View.VISIBLE);
 
         // Find the TextView with view ID section_name
         TextView sectionNameTextView = listItemView.findViewById(R.id.section_name);
-        if (currentResult.getSectionName().isEmpty())
+        if (currentArticle.getSectionName().isEmpty())
             sectionNameTextView.setVisibility(View.GONE);
         else {
-            sectionNameTextView.setText(currentResult.getSectionName());
+            sectionNameTextView.setText(currentArticle.getSectionName());
             sectionNameTextView.setVisibility(View.VISIBLE);
         }
 
         // Find the TextView with view ID title and hide it, if it is empty
         TextView titleTextView = listItemView.findViewById(R.id.title);
-        if (currentResult.getTitle().isEmpty()) titleTextView.setVisibility(View.GONE);
+        if (currentArticle.getTitle().isEmpty()) titleTextView.setVisibility(View.GONE);
         else {
-            titleTextView.setText(currentResult.getTitle());
+            titleTextView.setText(currentArticle.getTitle());
             titleTextView.setVisibility(View.VISIBLE);
         }
 
         // Find the TextView with view ID author. It can't be hided as next to this view is
         // publication date view and we don't want to be in the same line with title
         TextView authorsTextView = listItemView.findViewById(R.id.authors);
-        if (currentResult.getAuthors().isEmpty()) authorsTextView.setVisibility(View.GONE);
+        if (currentArticle.getAuthors().isEmpty()) authorsTextView.setVisibility(View.GONE);
         else {
-            authorsTextView.setText(currentResult.getAuthors());
+            authorsTextView.setText(currentArticle.getAuthors());
             authorsTextView.setVisibility(View.VISIBLE);
         }
 

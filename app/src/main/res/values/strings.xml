@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">The News 2.0</string>
+
+    <!-- Title text for the empty view -->
+    <string name="empty_view_title_text">There are no new article for these terms.</string>
+
+    <!-- The Menu Item [CHAR LIMIT=NONE] -->
+    <string name="settings_menu_item">Settings</string>
+    <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
+    <string name="settings_title">Settings</string>
+
+    <!-- Keyword Preference [CHAR LIMIT=30] -->
+    <string name="settings_keyword_label">Search for</string>
+    <string name="setting_keyword_default">@string/settings_keyword_label</string>
+
+    <!-- Category Preference [CHAR LIMIT=30] -->
+    <string name="settings_category_label">Category</string>
+    <string name="settings_category_default">@string/settings_category_label</string>
+
+    <!-- Politics category[CHAR LIMIT=20] -->
+    <string name="settings_politics_category">Politics</string>
+
+    <!-- Economy category [CHAR LIMIT=20] -->
+    <string name="settings_economy_category">Economy</string>
+
+    <!-- Education category [CHAR LIMIT=20] -->
+    <string name="settings_education_category">Education</string>
+
+    <!-- Travel category [CHAR LIMIT=20] -->
+    <string name="settings_travel_category">Travel</string>
+
+    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_default">@string/settings_order_by_newest_label</string>
+
+    <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_newest_label">Most Recent</string>
+
+    <!-- Label for order-by less recent option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_oldest_label">Less Recent</string>
+
+    <!-- Label for order-by most relevant option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_relevance_label">Most Relevant</string>
+
+</resources>

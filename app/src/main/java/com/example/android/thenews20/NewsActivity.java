@@ -1,12 +1,11 @@
 package com.example.android.thenews20;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
+import android.app.LoaderManager;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsActivity extends AppCompatActivity implements androidx.loader.app.LoaderManager.LoaderCallbacks<List<Result>> {
+public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Result>> {
 
     /**
      * Tag for log messages
@@ -41,7 +40,7 @@ public class NewsActivity extends AppCompatActivity implements androidx.loader.a
      * URL for google books data from the Google API
      */
     private static final String GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search?api-key=test&show-tags=contributor&from-date=2017-01-01";
+            "https://content.guardianapis.com/search?api-key=9ff797aa-915a-4c8c-8077-af0831891a80";
 
     ProgressDialog progressDialog;
 
@@ -84,7 +83,7 @@ public class NewsActivity extends AppCompatActivity implements androidx.loader.a
         if (isNetworkAvailable(context)) {
 
             // Get a reference to the LoaderManager, in order to interact with loaders.
-            LoaderManager loaderManager = getSupportLoaderManager();
+            LoaderManager loaderManager = getLoaderManager();
 
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
@@ -126,27 +125,27 @@ public class NewsActivity extends AppCompatActivity implements androidx.loader.a
         progressDialog.show();
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String keyword = sharedPrefs.getString(
+        String economy = sharedPrefs.getString(
                 getString(R.string.settings_keyword_label),
                 getString(R.string.setting_keyword_default));
-        String section = sharedPrefs.getString(
+        String news = sharedPrefs.getString(
                 getString(R.string.settings_category_label),
                 getString(R.string.settings_category_default));
-        String order_by = sharedPrefs.getString(
+        String newest = sharedPrefs.getString(
                 getString(R.string.settings_order_by_label),
                 getString(R.string.settings_order_by_default));
 
         Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("q", keyword);
-        uriBuilder.appendQueryParameter("section", section);
-        uriBuilder.appendQueryParameter("order-by", order_by);
-        String url = uriBuilder.toString();
+        uriBuilder.appendQueryParameter("q", economy);
+        uriBuilder.appendQueryParameter("section", news);
+        uriBuilder.appendQueryParameter("order-by", newest);
+        uriBuilder.appendQueryParameter("tags", "webTitle");
 
         Log.v(LOG_TAG, uriBuilder.toString());
         // Create a new loader for the given URL
-        return new NewsLoader(this, GUARDIAN_REQUEST_URL);
+        return new NewsLoader(this, uriBuilder.toString());
 
     }
 
